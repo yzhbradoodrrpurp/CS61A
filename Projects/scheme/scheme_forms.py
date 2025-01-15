@@ -195,7 +195,6 @@ def make_let_frame(bindings, env):
     return env.make_child_frame(names, vals)
 
 
-
 def do_quasiquote_form(expressions, env):
     """Evaluate a quasiquote form with parameters EXPRESSIONS in
     Frame ENV."""
@@ -232,7 +231,10 @@ def do_mu_form(expressions, env):
     formals = expressions.first
     validate_formals(formals)
     # BEGIN PROBLEM 11
-    "*** YOUR CODE HERE ***"
+    formals = expressions.first
+    body = expressions.rest
+
+    return MuProcedure(formals, body)
     # END PROBLEM 11
 
 
