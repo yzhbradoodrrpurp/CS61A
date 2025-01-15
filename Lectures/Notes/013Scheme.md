@@ -6,8 +6,8 @@ Scheme是以Lisp为基础的编程语言，属于函数式编程语言。
 
 Scheme语言的表达式有以下几种：
 
-- Primitive Expressions: 2, 3.3, true, +, quotient, ...
-- Combinations: (quotient 10, 2), (not true), ...
+- Primitive Expressions: `2` `3.3` `true` `+` `quotient` ...
+- Combinations: `(quotient 10 2)` `(not true)` ...
 
 ````scheme
 // Scheme不关心缩进，也不关心换行，只是为了可读性。
@@ -36,14 +36,14 @@ Scheme语言的表达式有以下几种：
 
 ## Scheme语言进阶
 
-- __(if [predicate] [consequent] [alternative])__
+- __`(if predicate consequent alternative)`__
   - predicate成立时，执行consequent；不成立时，执行alternative。
 
-- __(and [a] [b] [c] ...)__
+- __`(and a b c ...)`__
 
-- __(or [a] [b] [c] ...)__
+- __`(or a b c ...)`__
 
-- __(define [symbol] [expression])__
+- __`(define symbol expression)`__
   - 将expression的值定义为symbol。
 
 ````scheme
@@ -52,7 +52,7 @@ Scheme语言的表达式有以下几种：
 // 6.2831852
 ````
 
-- __(define ([symbol] [formal parameters]) [body])__
+- __`(define (symbol parameters) body)`__
   - 定义一个过程（其实就是函数，不过在Scheme中叫做过程），接收变量和返回变量。
 
 ````scheme
@@ -67,15 +67,15 @@ Scheme语言的表达式有以下几种：
 // 3
 ````
 
-- __(lambda [formal parameters] [body])__
-  - __接收的参数(formal parameters)必须用括号括起来，尽管参数可能只有一个。__
+- __`(lambda (parameters) body)`__
+  - __接收的参数(parameters)必须用括号括起来，尽管参数可能只有一个。__
 
 
 ````scheme
 (define plus4 (lambda (x) (+ x 4))
 ````
 
-- __(cond ([predicate]  [consequent]) ([predicate]  [consequent]) ...)__
+- __`(cond (predicate consequent) (predicate consequent) ...)`__
   - 相当于多重的if-elif-elif-else语句。
 
 ````scheme
@@ -86,24 +86,24 @@ Scheme语言的表达式有以下几种：
  )
 ````
 
-- __(begin ([expression] [expression] ...))__
+- __`(begin expression expression ...)`__
   - begin可以同时执行括号内多个命令。
 
 ````scheme
 (cond
  ((> x 10)
-  begin((print 'big) (print 'guy))
+  (begin (print 'big) (print 'guy))
   )
  ((> x 5)
-	begin((print 'medium) (print 'size))
+	(begin (print 'medium) (print 'size))
   )
  (else
-  begin((print 'small) (print 'light))
+  (begin (print 'small) (print 'light))
   )
  )
 ````
 
-- __(let (([symbol] [expression])) [body])__
+- __`(let ((symbol expression)) body)`__
   - let类似于define，但是只是一次性的将symbol和value绑定。
   - __注意let在将symbol和expression绑定时有两个括号。__
 
@@ -124,7 +124,7 @@ Scheme语言的表达式有以下几种：
 
 Scheme中的列表类似于Python中的链表，它的使用方法如下：
 
-- __(cons [value] [rest])__
+- __`(cons value rest)`__
   - value表示链表这一个节点的值，rest表示其余的链表。
 
 ````scheme
@@ -136,14 +136,14 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 (cons 2 (cons 1 (cons 3)))
 ````
 
-- __(car s)__
+- __`(car s)`__
   - 返回列表s中的第一个节点的值。
 
-- __(cdr s)__
+- __`(cdr s)`__
   - 返回列表中第一个节点以后的节点。
-- __nil__
+- __`nil`__
   - 空列表。
-- __(list [a] [b] [c] ...)__
+- __`(list a b c ...)`__
   - 可以用list关键字直接构建一个列表，a, b, c, ...都是列表中的值。
 
 同样可以判断一个变量是不是list类型：
@@ -169,7 +169,7 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 
 ### Built-In Functions
 
-- __(append s t)__
+- __`(append s t)`__
   - 返回一个新列表，将t列表追加到s列表后面，不会修改s, t。
 
 ````scheme
@@ -179,7 +179,7 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 // (1 2 3 4 5 6 7 8)
 ````
 
-- __(map f s)__
+- __`(map f s)`__
   - 对s中的每个元素应用f过程。
 
 ````scheme
@@ -188,7 +188,7 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 // (#f #t #f #t)
 ````
 
-- __(filter f s)__
+- __`(filter f s)`__
   - 对s中的每个元素，应用f过程，保留取值为真的元素。
 
 ````scheme
@@ -197,7 +197,7 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 // (2 4)
 ````
 
-- __(apply f s)__
+- __`(apply f s)`__
   - 对s整体使用f过程。
 
 ````scheme
@@ -217,7 +217,7 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 (list (quote a) (quote b))
 ````
 
-- __(quote [a])__也可以简写为__'[a]__。
+- __`(quote a)`__也可以简写为__`'a`__。
 
 <!--注意只有左边有单引号，右边没有。-->
 
@@ -234,3 +234,13 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 // (b c d)
 (cdr '(a b c d))
 ````
+
+- 除了一般的Quote之外，还有Quasiquote: ``(a b c)`。
+  - Quasiquote和Quote的不同之处在于，Quasiquote能够用 `,` 结束引用。
+
+````scheme
+(define b 4)
+`(+ a ,(* b 2))
+; 得到的结果就是(+ a 8)
+````
+
