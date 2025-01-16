@@ -210,6 +210,8 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 
 ## Quote
 
+### Basic Quote
+
 在Scheme中，用quote过程(Procedure)表示符号本身。
 
 ````scheme
@@ -235,12 +237,16 @@ Scheme中的列表类似于Python中的链表，它的使用方法如下：
 (cdr '(a b c d))
 ````
 
-- 除了一般的Quote之外，还有Quasiquote: ``(a b c)`。
-  - Quasiquote和Quote的不同之处在于，Quasiquote能够用 `,` 结束引用。
+### Quasiquote
+
+除了一般的Quote之外，还有Quasiquote: ``(a b c)`。
+
+- Quasiquote和Quote的不同之处在于，Quasiquote能够用 `,` 结束对下一个表达式的引用（__不会让后面的全部表达式都结束引用__）。
 
 ````scheme
 (define b 4)
 `(+ a ,(* b 2))
 ; 得到的结果就是(+ a 8)
+`(+ a ,(* b 2) ,(+ b 4))
+; 得到的结果就是(+ a 8 8)
 ````
-
